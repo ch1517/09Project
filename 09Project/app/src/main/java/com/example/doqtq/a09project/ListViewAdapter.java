@@ -2,6 +2,7 @@ package com.example.doqtq.a09project;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by doqtq on 2017-11-24.
@@ -18,10 +24,9 @@ import java.util.ArrayList;
 public class ListViewAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
-
     // ListViewAdapter의 생성자
     public ListViewAdapter() {
-
+        listViewItemList.clear();
     }
 
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
@@ -46,14 +51,18 @@ public class ListViewAdapter extends BaseAdapter {
         ImageView iconImageView = (ImageView) convertView.findViewById(R.id.iconImageView) ;
         TextView titleTextView = (TextView) convertView.findViewById(R.id.titleTextView) ;
         TextView descTextView = (TextView) convertView.findViewById(R.id.descTextView) ;
+        TextView writerTextView = (TextView) convertView.findViewById(R.id.writerTextView);
+        TextView dateTextView = (TextView) convertView.findViewById(R.id.dateTextView);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         ListViewItem listViewItem = listViewItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        iconImageView.setImageDrawable(listViewItem.getIcon());
-        titleTextView.setText(listViewItem.getTitle());
-        descTextView.setText(listViewItem.getDesc());
+        Glide.with(context).load("http://ekfms35.dothome.co.kr"+listViewItem.getBoard().getPhoto()).into(iconImageView);
+        titleTextView.setText(listViewItem.getBoard().getTitle());
+        descTextView.setText(listViewItem.getBoard().getContent());
+        writerTextView.setText(listViewItem.getBoard().getId());
+        dateTextView.setText(listViewItem.getBoard().getDate());
 
         return convertView;
     }
@@ -71,12 +80,9 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(Drawable icon, String title, String desc) {
+    public void addItem(Board board) {
         ListViewItem item = new ListViewItem();
-
-        item.setIcon(icon);
-        item.setTitle(title);
-        item.setDesc(desc);
+        item.setBoard(board);
 
         listViewItemList.add(item);
     }
@@ -84,32 +90,17 @@ public class ListViewAdapter extends BaseAdapter {
 
 
 class ListViewItem {
-    private Drawable iconDrawable;
-    private String titleStr;
-    private String descStr;
+    private Board board;
 
-    public void setIcon(Drawable icon) {
-        iconDrawable = icon;
+
+    public Board getBoard() {
+        return board;
     }
 
-    public void setTitle(String title) {
-        titleStr = title;
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
-    public void setDesc(String desc) {
-        descStr = desc;
-    }
 
-    public Drawable getIcon() {
-        return this.iconDrawable;
-    }
-
-    public String getTitle() {
-        return this.titleStr;
-    }
-
-    public String getDesc() {
-        return this.descStr;
-    }
 }
 

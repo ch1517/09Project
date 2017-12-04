@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.doqtq.a09project">
 
-    <uses-permission android:name="android.permission.INTERNET" ></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,20 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/NotTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:theme="@style/NotTheme" />
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/NotTheme" />
-        <activity android:name=".WritingActivity"></activity>
+        <activity android:name=".WritingActivity" />
+        <activity android:name=".ContentActivity" />
+        <activity android:name=".OrderListActivity"></activity>
     </application>
 
 </manifest>

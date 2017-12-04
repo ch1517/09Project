@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,6 +29,8 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText addresseditText = (EditText)findViewById(R.id.addresseditText);
         final EditText phoneNumeditText = (EditText)findViewById(R.id.phoneNumeditText);
 
+        final EditText confirmPweditText = (EditText)findViewById(R.id.confirmPweditText);
+
         Button registerButton = (Button)findViewById(R.id.registerButton);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -38,8 +41,12 @@ public class RegisterActivity extends AppCompatActivity {
                 String name = nameeditText.getText().toString();
                 String phone = phoneNumeditText.getText().toString();
                 String address = addresseditText.getText().toString();
-                Log.d("id",id);
 
+                String confirmPw = confirmPweditText.getText().toString();
+                Log.d("id",id);
+                if(!confirmPw.equals(pw)){
+                    Toast.makeText(getApplicationContext(),"비밀번호와 비밀번호확인 불일치",Toast.LENGTH_SHORT).show();
+                }
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

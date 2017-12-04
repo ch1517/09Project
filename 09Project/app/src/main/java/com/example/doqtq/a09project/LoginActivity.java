@@ -24,10 +24,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button signupBtn = (Button)findViewById(R.id.signupBtn);
-
-       final EditText idText = (EditText) findViewById(R.id.ideditText);
-       final EditText pwText = (EditText)findViewById(R.id.pweditText);
-       final Button loginButton = (Button)findViewById(R.id.loginButton);
+        Intent intent = getIntent();
+        final int mode = intent.getIntExtra("mode",0);
+        final EditText idText = (EditText) findViewById(R.id.ideditText);
+        final EditText pwText = (EditText)findViewById(R.id.pweditText);
+        final Button loginButton = (Button)findViewById(R.id.loginButton);
 
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,27 +43,28 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String id = idText.getText().toString();
                 final String pw = pwText.getText().toString();
-                Log.d("ddd",id+pw);
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("ssssss",response.toString ());
                         try{
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
                             if(success){
                                 final String id = jsonResponse.getString("id");
-                                final String pw = jsonResponse.getString("pw");
                                 final String name = jsonResponse.getString("name");
                                 final String phone = jsonResponse.getString("phone");
                                 final String address = jsonResponse.getString("address");
-                                Intent intent = new Intent(LoginActivity.this, WritingActivity.class);
-                                intent.putExtra("id",id);
-                                intent.putExtra("pw",pw);
-                                intent.putExtra("name",name);
-                                intent.putExtra("phone",phone);
-                                intent.putExtra("adress",address);
-                                LoginActivity.this.startActivity(intent);
+
+                                if(mode == 2) // 공구 참여 화면
+                                    finish();
+                                else{
+                                    if(mode == 1) {// 글쓰기 화면
+                                        Intent intent = new Intent(LoginActivity.this, WritingActivity.class);
+                                        LoginActivity.this.startActivity(intent);
+                                    }
+                                }
+                                LoginUser.loginUser = new UserInfo(id,name,phone,address);
+                                LoginActivity.this.finish();
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setMessage("로그인에 실패하였습니다.")
