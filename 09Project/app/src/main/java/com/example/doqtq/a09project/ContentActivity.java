@@ -41,7 +41,7 @@ public class ContentActivity extends AppCompatActivity {
         TextView dateTextView = findViewById(R.id.dateTextView);
         TextView contentTextView = findViewById(R.id.contentTextView);
 
-        Glide.with(this).load("http://ekfms35.dothome.co.kr"+board.getPhoto()).into(photoImageView);
+        Glide.with(this).load("http://ekfms35.dothome.co.kr/newImage/"+board.getPhoto()).into(photoImageView);
 
         Button participationBtn = (Button) findViewById(R.id.participationBtn); // 공구참여 버튼 0
         Button messageBtn = (Button)findViewById(R.id.messageBtn); // 메세지 버튼 0

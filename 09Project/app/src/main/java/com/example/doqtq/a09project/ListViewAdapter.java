@@ -58,7 +58,7 @@ public class ListViewAdapter extends BaseAdapter {
         ListViewItem listViewItem = listViewItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        Glide.with(context).load("http://ekfms35.dothome.co.kr"+listViewItem.getBoard().getPhoto()).into(iconImageView);
+        Glide.with(context).load("http://ekfms35.dothome.co.kr/newImage/"+listViewItem.getBoard().getPhoto()).into(iconImageView);
         titleTextView.setText(listViewItem.getBoard().getTitle());
         descTextView.setText(listViewItem.getBoard().getContent());
         writerTextView.setText(listViewItem.getBoard().getId());
