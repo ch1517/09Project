@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "839556960887",
+    "firebase_url": "https://gonggu-4f473.firebaseio.com",
+    "project_id": "gonggu-4f473",
+    "storage_bucket": "gonggu-4f473.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839556960887:android:42f50335b1f374ca",
+        "android_client_info": {
+          "package_name": "com.example.doqtq.a09project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839556960887-pt0tpfpbd9lq0h974s3n4ctntdjcvahb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3WtxGKvRfK05isI3mLLXOjr4mBmWRG7I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -14,9 +14,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
 
-        android:layout_marginTop="8dp"
-
         android:text="공구참여"
+        android:textColor="@color/colorWhite"
+        android:theme="@style/MyButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/messageBtn"
         app:layout_constraintStart_toStartOf="parent" />
@@ -29,6 +29,8 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:theme="@style/MyButton"
+        android:textColor="@color/colorWhite"
         android:text="진행현황"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,13 +38,16 @@
 
     <Button
         android:id="@+id/messageBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:text="대화하기"
+        android:textColor="@color/colorWhite"
+        android:theme="@style/MyButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/participationBtn" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -66,12 +71,10 @@
                 android:id="@+id/titletextView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:text="title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/photoimageView" />
 
@@ -82,6 +85,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
+                android:text="ID"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/priceTextView1"
@@ -102,8 +106,8 @@
 
             <ImageView
                 android:id="@+id/photoimageView"
-                android:layout_width="match_parent"
-                android:layout_height="109dp"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
