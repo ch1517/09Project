@@ -33,12 +33,12 @@
 
     <ImageView
         android:id="@+id/iconImageView"
+        android:layout_width="120sp"
+        android:layout_height="120sp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:scaleType="fitCenter"
-        android:layout_width="100sp"
-        android:layout_height="100sp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

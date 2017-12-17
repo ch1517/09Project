@@ -3,11 +3,11 @@
     package="com.example.doqtq.a09project">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--하드웨어 접근 허가권-->
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <!--잠든 단말 깨우기-->
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 하드웨어 접근 허가권 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 잠든 단말 깨우기 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,28 +16,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service
-            android:name=".FirebaseMessagingService">
+        <service android:name=".FirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".FirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <service
-            android:name=".FirebaseInstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-        </service>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/NotTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/NotTheme" />
@@ -46,7 +45,9 @@
             android:theme="@style/NotTheme" />
         <activity android:name=".WritingActivity" />
         <activity android:name=".ContentActivity" />
-        <activity android:name=".OrderListActivity"></activity>
+        <activity android:name=".OrderListActivity" />
+        <activity android:name=".MessageActivity" />
+        <activity android:name=".MessageListActivity"></activity>
     </application>
 
 </manifest>

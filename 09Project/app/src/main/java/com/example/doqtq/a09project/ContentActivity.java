@@ -57,9 +57,8 @@ public class ContentActivity extends AppCompatActivity {
         }
 
         Button participationBtn = (Button) findViewById(R.id.participationBtn); // 공구참여 버튼 0
-        Button messageBtn = (Button)findViewById(R.id.messageBtn); // 메세지 버튼 0
+        final Button messageBtn = (Button)findViewById(R.id.messageBtn); // 메세지 버튼 0
         Button orderListBtn = (Button)findViewById(R.id.orderListBtn); // 진행현황 버튼 1
-
         if(writerMode==0){
             participationBtn.setVisibility(View.VISIBLE);
             participationBtn.bringToFront();
@@ -103,6 +102,14 @@ public class ContentActivity extends AppCompatActivity {
                 orderListIntent.putExtra("idx",board.getIdx());
                 orderListIntent.putExtra("ordernum",board.getOrdernum());
                 startActivity(orderListIntent);
+            }
+        });
+
+        messageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent messageIntent = new Intent(ContentActivity.this, MessageActivity.class);
+                startActivity(messageIntent);
             }
         });
     }
