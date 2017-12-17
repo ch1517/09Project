@@ -1,6 +1,6 @@
 <?php
   include("./db_connect.php");
-  
+
   $id=$_POST["id"];//유저아이디
   $pw=$_POST["pw"];
   $name=$_POST["name"];
@@ -14,8 +14,8 @@
   $response = array();
   $response["success"]= true;
 
-   while(mysqli_stmt_fetch($statement)){//회원이 존재한다면
-      $response ["success"]=false;//true 값 나옴
+   while(mysqli_stmt_fetch($statement)){
+      $response ["success"]=false;
       $response ["id"]=$id;
     }
 
