@@ -9,6 +9,16 @@ class OrderListItem {
     private String memo;
     private int state;
     private String id;
+    private String delivery;
+
+    public String getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(String delivery) {
+        this.delivery = delivery;
+    }
+
     public String getId() {
         return id;
     }

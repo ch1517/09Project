@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,17 +39,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     ArrayList<Board> boardArrayList = new ArrayList<Board>();
     ListViewAdapter adapter = new ListViewAdapter();
     ListView listView;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new BackgroundTask().execute();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new BackgroundTask().execute();
+//        new BackgroundTask().execute();
         listView = (ListView)findViewById(R.id.listView);
 
         // 위에서 생성한 listview에 클릭 이벤트 핸들러 정의.
@@ -74,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 intent.putExtra("writerMode", writerMode);
                 intent.putExtra("board", item.getBoard());
+                intent.putExtra("ordernum",item.getBoard().getOrdernum());
+                intent.putExtra("ordernum2", item.getBoard().getOrdernum2());
+
                 startActivity(intent);
                 // TODO : use item data.
             }
@@ -89,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             boardArrayList.clear();
+            adapter.clear();
             target = "http://ekfms35.dothome.co.kr/ListShow.php";
             mDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             mDlg.show();
@@ -131,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONArray jsonArray = jsonObject.getJSONArray("response");
                 int count=0;
                 String idx, id, title, content, photo, date;
-                int price, ordernum, hit;
+                int price, ordernum, ordernum2, hit;
                 while(count<jsonArray.length()){
 
                     Log.d("for문",count+"");
@@ -143,9 +155,10 @@ public class MainActivity extends AppCompatActivity {
                     content = object.getString("content");
                     photo = object.getString("photo");
                     ordernum = object.getInt("ordernum");
+                    ordernum2 = object.getInt("ordernum2");
                     hit = object.getInt("hit");
                     date = object.getString("wdate");
-                    Board board = new Board(idx,id,title,price,content,photo,ordernum,hit,date);
+                    Board board = new Board(idx,id,title,price,content,photo,ordernum, ordernum2, hit,date);
                     adapter.addItem(board);
                     boardArrayList.add(board);
                     count++;
@@ -176,6 +189,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, WritingActivity.class);
                     startActivity(intent);
                 }
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

@@ -22,9 +22,15 @@ import com.bumptech.glide.Glide;
 
 import org.json.JSONObject;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.GrayscaleTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+
 public class ContentActivity extends AppCompatActivity {
     Board board;
     int writerMode=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +39,8 @@ public class ContentActivity extends AppCompatActivity {
 
         board = (Board)intent.getSerializableExtra("board");
         writerMode = intent.getIntExtra("writerMode",0);
+        int ordernum = intent.getIntExtra("ordernum",0);
+        int ordernum2 = intent.getIntExtra("ordernum2",0);
 
         ImageView photoImageView = findViewById(R.id.photoimageView);
         TextView titleTextView = findViewById(R.id.titletextView1);
@@ -40,8 +48,13 @@ public class ContentActivity extends AppCompatActivity {
         TextView idTextView = findViewById(R.id.idTextView);
         TextView dateTextView = findViewById(R.id.dateTextView);
         TextView contentTextView = findViewById(R.id.contentTextView);
-
-        Glide.with(this).load("http://ekfms35.dothome.co.kr/newImage/"+board.getPhoto()).into(photoImageView);
+        if(ordernum==ordernum2) {   // 마감 됐으면
+            Glide.with(this).load("http://ekfms35.dothome.co.kr/newImage/"+board.getPhoto())
+                    .apply(bitmapTransform(new GrayscaleTransformation()))
+            .into(photoImageView);
+        } else {
+            Glide.with(this).load("http://ekfms35.dothome.co.kr/newImage/"+board.getPhoto()).into(photoImageView);
+        }
 
         Button participationBtn = (Button) findViewById(R.id.participationBtn); // 공구참여 버튼 0
         Button messageBtn = (Button)findViewById(R.id.messageBtn); // 메세지 버튼 0
@@ -104,7 +117,7 @@ public class ContentActivity extends AppCompatActivity {
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, int which) {
-                EditText nameEditText = layout.findViewById(R.id.nameInputeditText);
+                EditText nameEditText = layout.findViewById(R.id.nameTextView2);
                 EditText memoEditText = layout.findViewById(R.id.memoeditText);
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -137,4 +150,5 @@ public class ContentActivity extends AppCompatActivity {
         AlertDialog ad = aDialog.create();
         ad.show();
     }
+
 }

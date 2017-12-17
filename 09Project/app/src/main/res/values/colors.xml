@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorBtn">#FF7474</color>
+    <color name="colorOnClickBtn">#FF8e8e</color>
     <color name="colorPeach">#FFA7A7</color>
     <color name="colorLightGray">#F6F6F6</color>
     <color name="colorWhite">#FFFFFF</color>

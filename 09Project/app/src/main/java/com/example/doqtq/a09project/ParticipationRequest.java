@@ -1,5 +1,7 @@
 package com.example.doqtq.a09project;
 
+import android.util.Log;
+
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
@@ -21,6 +23,7 @@ public class ParticipationRequest extends StringRequest {
         parameters.put("id",id);
         parameters.put("idx",idx);
         parameters.put("memo", memo);
+        parameters.put("token",LoginUser.loginUser.getToken());
     }
     @Override
     protected Map<String, String> getParams(){

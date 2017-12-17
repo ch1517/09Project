@@ -13,11 +13,12 @@ public class Board implements Serializable{
     private int price; // 가격
     private String content; // 글 내용
     private String photo; // 사진
-    private int ordernum; //  주문 번호
+    private int ordernum; //  총 공구 수
+    private int ordernum2; // 주문한 사람 명수
     private int hit; // 조회수
     private String date; // 날짜
 
-    public Board(String idx, String id, String title, int price, String content, String photo, int ordernum, int hit, String date) {
+    public Board(String idx, String id, String title, int price, String content, String photo, int ordernum, int ordernum2, int hit, String date) {
         this.idx = idx;
         this.id = id;
         this.title = title;
@@ -25,8 +26,17 @@ public class Board implements Serializable{
         this.content = content;
         this.photo = photo;
         this.ordernum = ordernum;
+        this.ordernum2 = ordernum2;
         this.hit = hit;
         this.date = date;
+    }
+
+    public int getOrdernum2() {
+        return ordernum2;
+    }
+
+    public void setOrdernum2(int ordernum2) {
+        this.ordernum2 = ordernum2;
     }
 
     public String getIdx() {

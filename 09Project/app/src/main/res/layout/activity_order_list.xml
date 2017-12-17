@@ -7,13 +7,16 @@
     tools:context="com.example.doqtq.a09project.OrderListActivity">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/deliveryBtn"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="5dp"
-        android:text="배송시작"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:text="전체 공지"
+        android:textColor="@color/colorWhite"
+        android:theme="@style/MyButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/orderNumBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
@@ -23,20 +26,24 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/orderNumBtn" />
 
-    <TextView
-        android:id="@+id/orderTextView"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/orderNumBtn"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorWhite"
+        android:theme="@style/MyButton"
+        app:layout_constraintEnd_toStartOf="@+id/deliveryBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

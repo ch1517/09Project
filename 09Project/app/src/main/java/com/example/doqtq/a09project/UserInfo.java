@@ -9,11 +9,14 @@ public class UserInfo {
     private String name;
     private String phone;
     private String address;
-    UserInfo(String id, String name, String phone, String address){
+    private String token;
+
+    UserInfo(String id, String name, String phone, String address, String token){
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.address = address;
+        this.token = token;
     }
     void setId(String id){
         this.id = id;
@@ -39,4 +42,6 @@ public class UserInfo {
     String getAddress(){
         return address;
     }
+    void setToken(String token){ this.token = token; }
+    String getToken(){ return token; }
 }

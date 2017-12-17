@@ -17,6 +17,11 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.GrayscaleTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+
 /**
  * Created by doqtq on 2017-11-24.
  */
@@ -26,6 +31,9 @@ public class ListViewAdapter extends BaseAdapter {
     private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
     // ListViewAdapter의 생성자
     public ListViewAdapter() {
+        listViewItemList.clear();
+    }
+    public void clear(){
         listViewItemList.clear();
     }
 
@@ -57,8 +65,14 @@ public class ListViewAdapter extends BaseAdapter {
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         ListViewItem listViewItem = listViewItemList.get(position);
 
+        if(listViewItem.getBoard().getOrdernum()==listViewItem.getBoard().getOrdernum2()){
+            Glide.with(context).load("http://ekfms35.dothome.co.kr/newImage/"+listViewItem.getBoard().getPhoto())
+                    .apply(bitmapTransform(new GrayscaleTransformation()))
+                    .into(iconImageView);
+        } else {
+            Glide.with(context).load("http://ekfms35.dothome.co.kr/newImage/"+listViewItem.getBoard().getPhoto()).into(iconImageView);
+        }
         // 아이템 내 각 위젯에 데이터 반영
-        Glide.with(context).load("http://ekfms35.dothome.co.kr/newImage/"+listViewItem.getBoard().getPhoto()).into(iconImageView);
         titleTextView.setText(listViewItem.getBoard().getTitle());
         descTextView.setText(listViewItem.getBoard().getContent());
         writerTextView.setText(listViewItem.getBoard().getId());
