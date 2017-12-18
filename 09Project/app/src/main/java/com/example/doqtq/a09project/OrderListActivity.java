@@ -71,13 +71,16 @@ public class OrderListActivity extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
                             if(success){
-                                adapter.notifyDataSetChanged();
                             } else {
                                 Log.d("Errer","can't end");
                             }
                         } catch (Exception e){
                             Log.d("qtqtqt",e.getMessage());
                         }
+                        Log.d("orderNumBtn","onclick!!");
+                        orderListCallfunc();
+                        adapter.notifyDataSetChanged();
+                        adapter.notifyDataSetInvalidated();
                     }
 
                 };
@@ -85,6 +88,8 @@ public class OrderListActivity extends AppCompatActivity {
                 OrderEndRequest orderListRequest = new OrderEndRequest(idx+"", ordernum+"",ordernum2+"", responseListener);
                 RequestQueue queue = Volley.newRequestQueue(OrderListActivity.this);
                 queue.add(orderListRequest);
+                if(ordernum>ordernum2)
+                    Toast.makeText(getApplicationContext(),"인원이 다 모이지 않았어요 :(",Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -172,10 +177,26 @@ public class OrderListActivity extends AppCompatActivity {
                     Log.d("oooooo",i+"    "+ordernum2);
                     if(i==ordernum2){ // 1이면 공지, 0이면 배송시작
                         Log.d("ㅇㅇㅇ 맞음","ㅇㅇㅇ");
-                        deliveryBtn.setText("배송 시작");
-                        delivery_count = 0;
+                        if(ordernum2==0){
+
+                        }
+                        else {
+                            deliveryBtn.setText("배송 시작");
+
+                            orderNumBtn.setBackgroundResource(R.drawable.statebtn);
+                            orderNumBtn.setTextColor(0xFF000000);
+
+                            deliveryBtn.setBackgroundResource(R.drawable.btnimage);
+                            deliveryBtn.setTextColor(0xFFFFFFFF);
+
+                            delivery_count = 0;
+                        }
                     }
-                    orderNumBtn.setText("모집인원 : "+ordernum2+"/"+ordernum);
+                    if(ordernum!=ordernum2){
+                        orderNumBtn.setText("모집인원 : "+ordernum2+"/"+ordernum);
+                    } else {
+                        orderNumBtn.setText("모집완료("+ordernum+")");
+                    }
                     listView.setAdapter(adapter);
                     Log.d("adapter",adapter.getItem(0)+"");
                 } catch (Exception e){
@@ -291,23 +312,26 @@ public class OrderListActivity extends AppCompatActivity {
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("response2222",response);
+                        Log.d("responseresponse",response);
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
                             if (success) {
-                                Toast.makeText(OrderListActivity.this,"운송장번호 완료",Toast.LENGTH_LONG).show();
+                                Toast.makeText(OrderListActivity.this,"운송장번호 등록 완료",Toast.LENGTH_SHORT).show();
                             }else{
 
                             }
                         } catch (Exception e) {
                             Log.d("FCM",e.getMessage());
                         }
+                        orderListCallfunc();
+                        adapter.notifyDataSetChanged();
                     }
                 };
                 TransportNumberRequest transportNumberRequest = new TransportNumberRequest(id, name, idx, deliverystr,responseListener);
                 RequestQueue queue = Volley.newRequestQueue(OrderListActivity.this);
                 queue.add(transportNumberRequest);
+
             }
         });
         aDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -337,21 +361,4 @@ public class OrderListActivity extends AppCompatActivity {
             return parameters;
         }
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.refresh_menu, menu);
-//        return true;
-//    }
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.refresh:
-//                adapter.clear();
-//                orderListCallfunc();
-//                break;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }
-

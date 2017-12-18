@@ -1,6 +1,7 @@
 package com.example.doqtq.a09project;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -70,14 +71,13 @@ public class MainActivity extends AppCompatActivity{
                 Intent intent = new Intent(MainActivity.this,ContentActivity.class);
                 int writerMode = 0;
                 if(LoginUser.loginUser == null){
-                    Toast.makeText(getApplicationContext(),"작성자 아님",Toast.LENGTH_SHORT).show();
+                    // 작성자 아닐 때
                 } else {
                     if(LoginUser.loginUser.getId().equals(writerStr)) {
-                        Toast.makeText(getApplicationContext(), "작성자 맞음", Toast.LENGTH_SHORT).show();
                         writerMode = 1;
                     }
                     else {
-                        Toast.makeText(getApplicationContext(), "작성자 아님", Toast.LENGTH_SHORT).show();
+                        // 작성자 아닐 때
                     }
                 }
                 intent.putExtra("writerMode", writerMode);
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()){
             case R.id.writing09:
                 if(LoginUser.loginUser == null) {
@@ -190,7 +190,44 @@ public class MainActivity extends AppCompatActivity{
                     startActivity(intent);
                 }
                 break;
+            case R.id.login:
+                if(LoginUser.loginUser == null) {
+                    item.setTitle("Logout"); // 이름을 로그인이라고 바꿔준다.
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.putExtra("mode", 2); // 로그인화면
+                    startActivity(intent);
+                }else{
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("로그아웃 할까요?")
+                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(final DialogInterface dialog, int which) {
+                                    item.setTitle("Login"); // 이름을 로그아웃이라고 바꿔준다.
+                                    Toast.makeText(getApplicationContext(),"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show();
+                                    LoginUser.loginUser=null;
+                                }
+                            })
+                            .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .create()
+                            .show();
 
+                }
+                break;
+            case R.id.message:
+                if(LoginUser.loginUser ==null){
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.putExtra("mode", 2); // 로그인화면
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(MainActivity.this, MessageListActivity.class);
+                    startActivity(intent);
+                }
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

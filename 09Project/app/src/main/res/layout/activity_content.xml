@@ -9,14 +9,13 @@
     <Button
         android:id="@+id/participationBtn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-
+        android:background="@drawable/btnimage"
         android:text="공구참여"
         android:textColor="@color/colorWhite"
-        android:theme="@style/MyButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/messageBtn"
         app:layout_constraintStart_toStartOf="parent" />
@@ -25,13 +24,13 @@
     <Button
         android:id="@+id/orderListBtn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:theme="@style/MyButton"
-        android:textColor="@color/colorWhite"
+        android:background="@drawable/btnimage"
         android:text="진행현황"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -39,12 +38,12 @@
     <Button
         android:id="@+id/messageBtn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/btnimage"
         android:text="대화하기"
         android:textColor="@color/colorWhite"
-        android:theme="@style/MyButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@id/participationBtn" />

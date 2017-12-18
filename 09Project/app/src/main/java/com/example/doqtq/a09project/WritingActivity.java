@@ -198,7 +198,8 @@ public class WritingActivity extends AppCompatActivity implements View.OnClickLi
         String boundary = "*****";
         int bytesRead, bytesAvailable, bufferSize;
         byte[] buffer;
-        int maxBufferSize = 1 * 10240 * 10240;
+//        int maxBufferSize = 1 * 10240 * 10240;
+        int maxBufferSize = 1 * 12000 * 12000;
         File sourceFile = new File(uploadFilePath);
 
         @Override

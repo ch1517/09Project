@@ -6,6 +6,8 @@
     <color name="colorBtn">#FF7474</color>
     <color name="colorOnClickBtn">#FF8e8e</color>
     <color name="colorPeach">#FFA7A7</color>
+    <color name="colorGray">#ACACAC</color>
+    <color name="colorGray2">#C4C4C4</color>
     <color name="colorLightGray">#F6F6F6</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>

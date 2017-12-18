@@ -59,6 +59,9 @@ public class ContentActivity extends AppCompatActivity {
         Button participationBtn = (Button) findViewById(R.id.participationBtn); // 공구참여 버튼 0
         final Button messageBtn = (Button)findViewById(R.id.messageBtn); // 메세지 버튼 0
         Button orderListBtn = (Button)findViewById(R.id.orderListBtn); // 진행현황 버튼 1
+        participationBtn.setBackgroundResource(R.drawable.btnimage);
+        messageBtn.setBackgroundResource(R.drawable.btnimage);
+        orderListBtn.setBackgroundResource(R.drawable.btnimage);
         if(writerMode==0){
             participationBtn.setVisibility(View.VISIBLE);
             participationBtn.bringToFront();
@@ -108,8 +111,13 @@ public class ContentActivity extends AppCompatActivity {
         messageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent messageIntent = new Intent(ContentActivity.this, MessageActivity.class);
-                startActivity(messageIntent);
+                if(LoginUser.loginUser==null){
+                    Toast.makeText(getApplicationContext(),"로그인 후 이용해주세요 :)",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent messageIntent = new Intent(ContentActivity.this, MessageActivity.class);
+                    messageIntent.putExtra("toUserId",board.getId());
+                    startActivity(messageIntent);
+                }
             }
         });
     }

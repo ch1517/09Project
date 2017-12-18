@@ -1,6 +1,9 @@
 package com.example.doqtq.a09project;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +18,15 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.util.Util;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import jp.wasabeef.glide.transformations.internal.Utils;
 
 /**
  * Created by doqtq on 2017-12-02.
@@ -50,6 +56,7 @@ public class OrderListAdapter extends BaseAdapter {
     }
 
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
+    @SuppressLint("ResourceAsColor")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
@@ -75,13 +82,25 @@ public class OrderListAdapter extends BaseAdapter {
         memoTextView.setText("["+orderListItem.getMemo()+"]");
         id = orderListItem.getId();
         if(orderListItemArrayList.get(pos).getState()==0){
+            //state == 0
             stateBtn.setText("입금대기");
-//            stateBtn.setBackgroundColor(((int) R.color.colorLightGray));
+            stateBtn.setBackgroundResource(R.drawable.btnimage);
+            stateBtn.setTextColor(0xFFFFFFFF);
         } else if (orderListItemArrayList.get(pos).getState()==1) {
+            //state == 1
             stateBtn.setText("입금완료");
-//            stateBtn.setBackgroundColor(((int) R.color.colorPeach));
-        } else {
+            stateBtn.setTextColor(0xFF000000);
+            stateBtn.setBackgroundResource(R.drawable.statebtn);
+        } else if (orderListItemArrayList.get(pos).getState()==2) {
+            //state == 2
             stateBtn.setText("운송장 번호 입력");
+            stateBtn.setBackgroundResource(R.drawable.btnimage);
+            stateBtn.setTextColor(0xFFFFFFFF);
+        } else{
+            //state == 3
+            stateBtn.setText("운송장 번호 입력완료");
+            stateBtn.setBackgroundResource(R.drawable.statebtn);
+            stateBtn.setTextColor(0xFFFFFFFF);
         }
         stateBtn.invalidate();
         stateBtn.setTag(position);
@@ -102,6 +121,7 @@ public class OrderListAdapter extends BaseAdapter {
                                 ordernum2 = jsonResponse.getInt("ordernum2");
                                 Log.d("받은 State",stateDB+"");
                                 orderListItemArrayList.get(pos).setState(stateDB);
+
                                 OrderListActivity.orderNumBtn.setText("모집인원 : "+ordernum2+"/"+ordernum);
                             } else{
                                 Toast.makeText(context, "마감",Toast.LENGTH_SHORT).show();
@@ -118,7 +138,9 @@ public class OrderListAdapter extends BaseAdapter {
                         orderListItemArrayList.get(pos).getState(),ordernum,ordernum2,responseListener);
                 RequestQueue queue = Volley.newRequestQueue(context);
                 queue.add(oderListReqiestextends);
-
+                if(orderListItemArrayList.get(pos).getState()==2){
+                    ((OrderListActivity)context).deliveryDialog(orderListItemArrayList.get(pos).getName(),orderListItemArrayList.get(pos).getId(),idx+"");
+                }
                 OrderListAdapter.this.notifyDataSetChanged();
             }
         });
@@ -166,6 +188,7 @@ public class OrderListAdapter extends BaseAdapter {
             parameters.put("state",state+"");
             parameters.put("ordernum", ordernum+"");
             parameters.put("ordernum2", ordernum2+"");
+            Log.d("OderListReqiestextends", state+" "+id+" "+ name + state+ " ");
         }
         @Override
         protected Map<String, String> getParams(){
